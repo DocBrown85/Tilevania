@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Run();
+        FlipSprite();
     }
 
     private void Run()
@@ -25,5 +27,14 @@ public class Player : MonoBehaviour
         float controlThrow = Input.GetAxis("Horizontal"); // value is -1 to +1
         Vector2 playerVelocity = new Vector2(controlThrow * runSpeed, myRigidbody2D.velocity.y);
         myRigidbody2D.velocity = playerVelocity;
+    }
+
+    private void FlipSprite()
+    {
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody2D.velocity.x) > Mathf.Epsilon;
+        if (playerHasHorizontalSpeed)
+        {
+            transform.localScale = new Vector2(Mathf.Sign(myRigidbody2D.velocity.x), 1f);
+        }
     }
 }
