@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class Player : MonoBehaviour
 {
     // Configurations
     [SerializeField] float runSpeed = 5f;
+    [SerializeField] float jumpSpeed = 5f;
 
     // State
     bool isAlive = true;
@@ -14,6 +16,7 @@ public class Player : MonoBehaviour
     // Cached components references
     Rigidbody2D myRigidbody2D;
     Animator myAnimator;
+    Collider2D myCollider2D;
 
     // Message then methods
 
@@ -22,12 +25,14 @@ public class Player : MonoBehaviour
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myCollider2D = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Run();
+        Jump();
         FlipSprite();
     }
 
@@ -39,6 +44,17 @@ public class Player : MonoBehaviour
 
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody2D.velocity.x) > Mathf.Epsilon;
         myAnimator.SetBool("Running", playerHasHorizontalSpeed);
+    }
+
+    private void Jump()
+    {
+        if (!myCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            Vector2 jumpVelocityToAdd = new Vector2(0f, jumpSpeed);
+            myRigidbody2D.velocity += jumpVelocityToAdd;
+        }
     }
 
     private void FlipSprite()

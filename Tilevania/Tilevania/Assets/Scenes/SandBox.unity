@@ -2035,7 +2035,7 @@ GameObject:
   - component: {fileID: 1140239570}
   - component: {fileID: 1140239569}
   - component: {fileID: 1140239568}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3071,11 +3071,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6478349968988700511, guid: 37468b75f18d5db4aa4cef419229110a,
-        type: 3}
-      propertyPath: runSpeed
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6677354927465910336, guid: 37468b75f18d5db4aa4cef419229110a,
         type: 3}
       propertyPath: m_LocalPosition.x
